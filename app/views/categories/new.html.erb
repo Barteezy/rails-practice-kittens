@@ -1,0 +1,19 @@
+<h1>Categorize</h1>
+
+<% if flash[:notice] %>
+   <span style="color:red"> <%= flash[:notice] %></span>
+<% end %>
+<p><%= image_tag @kitten.image %></p>
+
+<%= form_for [@kitten, @category], url: kitten_categories_path do |f| %>
+    <% if @kittencategory.errors.any? %>
+        <% @kittencategory.errors.full_messages.each do |message| %>
+            <p class="errors"><%= message %><p>
+        <% end %>
+    <% end %>
+
+    <%= f.select :name, Category.all.collect {|e| [e.name]} %>
+    <%= f.submit "Submit Category" %>
+<% end %>
+
+
